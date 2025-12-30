@@ -1,0 +1,56 @@
+<h2>Admin Dashboard</h2>
+<a href="/logout">Logout</a>
+
+<h3>🔔 Notifications</h3>
+{% for n in notifications %}
+<p>{{ n.message }} ({{ n.target }}) <a href="/delete-notification/{{ n.id }}">❌</a></p>
+{% endfor %}
+<form method="POST" action="/add-notification">
+<input name="message" placeholder="Message">
+<input name="target" placeholder="all or username">
+<button>Add</button>
+</form>
+
+<hr>
+
+<h3>📢 Notices</h3>
+{% for n in notices %}
+<form method="POST" action="/edit-notice/{{ n.id }}">
+<input name="text" value="{{ n.text }}">
+<button>Update</button>
+<a href="/delete-notice/{{ n.id }}">Delete</a>
+</form>
+{% endfor %}
+<form method="POST" action="/add-notice">
+<input name="text" placeholder="New notice">
+<button>Add</button>
+</form>
+
+<hr>
+
+<h3>📂 Directory</h3>
+{% for d in directory %}
+<p>{{ d.name }} | {{ d.address }} | {{ d.phone }}</p>
+{% endfor %}
+<form method="POST" action="/add-directory">
+<input name="name" placeholder="Name">
+<input name="address" placeholder="Address">
+<input name="phone" placeholder="Phone">
+<button>Add</button>
+</form>
+
+<hr>
+
+<h3>👤 Add User</h3>
+<form method="POST" action="/add-user">
+<input name="username" placeholder="Username">
+<input name="password" placeholder="Password">
+<input name="name" placeholder="Name">
+<input name="address" placeholder="Address">
+<input name="phone" placeholder="Phone">
+<button>Add User</button>
+</form>
+
+<hr>
+<a href="/export/pdf">Export PDF</a> |
+<a href="/export/excel">Export Excel</a>

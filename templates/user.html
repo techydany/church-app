@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <meta charset="UTF-8">
+</head>
+<body style="font-family:Arial; padding:20px;">
+
+  <h2>Welcome</h2>
+  <a href="/logout">Logout</a>
+
+  <hr>
+
+  <!-- 🔔 NOTIFICATIONS -->
+  <h3>🔔 Notifications</h3>
+  {% if notifications %}
+    {% for n in notifications %}
+      <p>• {{ n.message }}</p>
+    {% endfor %}
+  {% else %}
+    <p>No notifications</p>
+  {% endif %}
+
+  <hr>
+
+  <!-- 📢 NOTICES -->
+  <h3>📢 Notices</h3>
+  {% if notices %}
+    {% for n in notices %}
+      <p>• {{ n.text }}</p>
+    {% endfor %}
+  {% else %}
+    <p>No notices available</p>
+  {% endif %}
+
+  <hr>
+
+  <!-- 📂 DIRECTORY -->
+  <h3>📂 Church Directory</h3>
+  {% if directory %}
+    {% for d in directory %}
+      <p>
+        <strong>{{ d.name }}</strong><br>
+        {{ d.address }}<br>
+        📞 {{ d.phone }}
+      </p>
+      <hr>
+    {% endfor %}
+  {% else %}
+    <p>No directory data</p>
+  {% endif %}
+
+  <hr>
+
+  <!-- 📝 USER FEEDBACK (WEB3FORMS) -->
+  <h3>📝 Feedback</h3>
+
+  <form action="https://api.web3forms.com/submit" method="POST">
+
+    <!-- 🔑 WEB3FORMS ACCESS KEY -->
+    <input type="hidden" name="access_key" value="8289cdc5-f6b8-4a99-b305-3c8c79bae64d">
+
+    <!-- OPTIONAL METADATA -->
+    <input type="hidden" name="subject" value="Church Website Feedback">
+    <input type="hidden" name="from_name" value="St. George Malankara Catholic Church">
+
+    <label>Your Name</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Your Email</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Your Feedback</label><br>
+    <textarea name="message" rows="5" required></textarea><br><br>
+
+    <button type="submit">Send Feedback</button>
+  </form>
+
+  <hr>
+
+  <!-- 📤 EXPORT -->
+  <h3>📤 Export</h3>
+  <a href="/export/pdf">Download Directory PDF</a><br>
+  <a href="/export/excel">Download Directory Excel</a>
+
+</body>
+</html>
